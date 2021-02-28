@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata" rel="stylesheet">
+    <style>
+        body{
+            margin: 5%;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+        .active{
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }
+        active2{
+            background-color: aqua;
+            border: 0;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+   <div id="app">
+    <header>
+        <img src="/image/logo.png" width="80">
+        <h1 v-text='name'></h1>
+        <input type="text" v-model='name'>
+        
+        <ul>
+            <li v-for="(item, index) in kelas">{{ index+1 }} - {{ item }}</li>
+        </ul>
+
+        <h3>Perulangan (1-5)</h3>
+        <ul>
+            <li v-for="x in 5">{{ x }}</li>
+        </ul>
+
+        <h3>Mencari Bilangan Genap: {{ number }}</h3>
+        <ul>
+            <li v-for="x in findnumber(number)">{{ x }}</li>
+        </ul>
+
+    <p>{{ kelas }}</p>
+    <p>
+    <div>
+        <label><input type="checkbox" value="React" v-model="kelas">React</label>
+        <label><input type="checkbox" value="Vue"v-model="kelas">Vue</label>
+        <label><input type="checkbox" value="Angular"v-model="kelas">Angular</label>
+    </div>
+    </p>
+    <h1 v-text='bilangan'></h1>
+        <p>Bilangan ini adalah bilangan {{ numbering }} </p>
+        <p>
+            <button @click="handleclickplus">Tambah </button>
+        </p>
+        <p>
+            <button @click="handleclickminus">Kurang </button>
+        </p>
+        <img :src="pict" width="500"> 
+        
+        <p>The Progressive JavaScript Framework</p>
+
+        <button v-bind:class="{active:menu === 'home'}" @click="menu = 'home' ">Home</button>
+        <button v-bind:class="{active:menu === 'about'}" @click="menu = 'about' ">About</button>
+        <button v-bind:class="{active:menu === 'blog'}" @click="menu = 'blog' ">Blog</button>
+    </header>
+    <footer id="footer">
+        <p>&copy;2021</p>
+    </footer>
+   </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                 // string, number, boolean, array, obj
+                name: 'Mamanx Garox',
+                msg: 'Hello World!',
+                qty: 5,
+                fname: 'Minyak',
+                lname: ' Zaitun',
+                bilangan: 1,
+                pict: 'image/vuejs.jpg',
+                menu: 'home',
+                kelas: ['Golang', 'PHP', 'Python', 'NodeJS'],
+                number: [1,2,3,4,5]
+            },
+            methods: {
+                getname: ()=>{
+                    return 'Hello, '+ this.name
+                },
+                chname: (newName)=> {
+                    this.name = newName
+                    return this.getname()
+                },
+                handleclickplus: () => {
+                    this.bilangan++
+                    this.pict = 'image/vue.jpg'
+                },
+                handleclickminus: () => {
+                    this.bilangan--
+                    this.pict ='image/vuejs.jpg'
+                },
+                findnumber: (datanumb) => {
+                    return datanumb.filter( angka =>{
+                        return angka %2 == 0
+                    })
+                }
+            },
+            computed:{
+                total: () => {
+                    return this.qty * 10000
+                },
+                fullname: () => {
+                    return this.fname + this.lname
+                },
+                numbering: () => {
+                    return  this.bilangan%2 === 0 ? 'Genap':'Ganjil'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
