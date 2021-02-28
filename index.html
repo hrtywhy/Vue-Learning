@@ -30,7 +30,8 @@
         <h1 v-text='name'></h1>
         <input type="text" v-model='name'>
         
-        <ul>
+        <h3>Daftar Kelas ({{ kelas.length}})</h3>
+        <ul v-if="kelas.length > 1">
             <li v-for="(item, index) in kelas">{{ index+1 }} - {{ item }}</li>
         </ul>
 
