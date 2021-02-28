@@ -1,6 +1,6 @@
 # Vue-Learning
 
-![Build Project](https://github.com/vuejs-id/blog/workflows/Build%20Project/badge.svg) ![Dependencies](https://img.shields.io/david/vuejs-id/blog.svg)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Build Project](https://github.com/vuejs-id/blog/workflows/Build%20Project/badge.svg) ![made-with-bash](https://img.shields.io/badge/Made%20with-Bash-1f425f.svg)](https://www.gnu.org/software/bash/)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 >When i got leisure i dunno what must i do. So, i challenge myself to learn about VUE the progressive JavaScript framework in one week
 
@@ -13,3 +13,8 @@
 1. Install depedencies `yarn`
 2. Run project `yarn dev`, open at `http://localhost:8080`
 3. Build project `yarn build`
+
+# MERN Stack Simple CRUD
+
+If you think this source code is useful, it will be great if you just give it star, lets grow up together🤟
+
