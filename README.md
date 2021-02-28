@@ -2,7 +2,7 @@
 
 ![Build Project](https://github.com/vuejs-id/blog/workflows/Build%20Project/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
->When i got leisure i dunno what must i do. So, i challenge myself to learn about VUE the progressive JavaScript framework in one week
+>My repo learn VueJS
 
 ## ❤️ Development
 
