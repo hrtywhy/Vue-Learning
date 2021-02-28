@@ -31,9 +31,14 @@
         <input type="text" v-model='name'>
         
         <h3>Daftar Kelas ({{ kelas.length}})</h3>
-        <ul v-if="kelas.length > 1">
-            <li v-for="(item, index) in kelas">{{ index+1 }} - {{ item }}</li>
-        </ul>
+        <template v-if="kelas.length > 1">
+            <ul>
+                <li v-for="(item, index) in kelas">{{ index+1 }} - {{ item }}</li>
+            </ul>
+        </template>
+        <li v-else>Kelas Belum Tersedia</li>
+           
+
 
         <h3>Perulangan (1-5)</h3>
         <ul>
@@ -88,7 +93,7 @@
                 bilangan: 1,
                 pict: 'image/vuejs.jpg',
                 menu: 'home',
-                kelas: [],
+                kelas: ['Golang', 'PHP'],
                 number: [1,2,3,4,5]
             },
             methods: {
