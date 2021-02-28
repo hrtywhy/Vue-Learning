@@ -2,7 +2,7 @@
 
 ![Build Project](https://github.com/vuejs-id/blog/workflows/Build%20Project/badge.svg) ![Dependencies](https://img.shields.io/david/vuejs-id/blog.svg)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
->Repo learning the progressive JavaScript framework
+>When i got leisure i dunno what must i do. So, i challenge myself to learn about VUE the progressive JavaScript framework in one week
 
 ## Indonesian VueJS Community
 
@@ -10,6 +10,6 @@
 
 ## Development
 
-1. Install deps `yarn`
+1. Install depedencies `yarn`
 2. Run project `yarn dev`, open at `http://localhost:8080`
 3. Build project `yarn build`
