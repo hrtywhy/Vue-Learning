@@ -10,11 +10,8 @@
 
 ## Development
 
-1. Install depedencies `yarn`
-2. Run project `yarn dev`, open at `http://localhost:8080`
-3. Build project `yarn build`
-
-# MERN Stack Simple CRUD
+` 1. Install depedencies `yarn` `
+` 2. Run project `yarn dev`, open at `http://localhost:8080` `
+` 3. Build project `yarn build` `
 
 If you think this source code is useful, it will be great if you just give it star, lets grow up together🤟
-
