@@ -15,12 +15,7 @@
             background: salmon;
             border: 0;
             padding: 5px;
-        }
-        active2{
-            background-color: aqua;
-            border: 0;
-            padding: 5px;
-        }
+        }        
     </style>
 </head>
 <body>
@@ -58,21 +53,21 @@
         <label><input type="checkbox" value="Angular"v-model="kelas">Angular</label>
     </div>
     </p>
-    <h1 v-text='bilangan'></h1>
+        <!-- <h1 v-text='bilangan'></h1>
         <p>Bilangan ini adalah bilangan {{ numbering }} </p>
         <p>
             <button @click="handleclickplus">Tambah </button>
         </p>
         <p>
             <button @click="handleclickminus">Kurang </button>
-        </p>
+        </p> -->
         <img :src="pict" width="500"> 
         
         <p>The Progressive JavaScript Framework</p>
 
-        <button v-bind:class="{active:menu === 'home'}" @click="menu = 'home' ">Home</button>
-        <button v-bind:class="{active:menu === 'about'}" @click="menu = 'about' ">About</button>
-        <button v-bind:class="{active:menu === 'blog'}" @click="menu = 'blog' ">Blog</button>
+        <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="gantimenu('home', $event)">Home</a>
+        <a v-bind:class="{active: menu === 'about'}" href="#" v-on:@click="gantimenu('about', $event)">About</a>
+        <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:@click="gantimenu('blog', $event)">Blog</a>
     </header>
     <footer id="footer">
         <p>&copy;2021</p>
@@ -116,6 +111,11 @@
                     return datanumb.filter( angka =>{
                         return angka %2 == 0
                     })
+                },
+                gantimenu: function(data, event){
+                    event.preventDefault()
+                    console.log(event)
+                    this.menu = data
                 }
             },
             computed:{
