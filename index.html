@@ -23,7 +23,9 @@
     <header>
         <img src="image/logo.png" width="80">
         <h1 v-text='name'></h1>
-        <input type="text" v-model='name'>
+
+        <h3>Form Submit</h3>
+        <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit'></p>
         
         <h3>Daftar Kelas ({{ kelas.length}})</h3>
         <template v-if="kelas.length > 1">
@@ -74,7 +76,7 @@
     </footer>
    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
     <script>
         const vm = new Vue({
             el: '#app',
@@ -114,6 +116,11 @@
                 },
                 gantimenu: function(data){
                     this.menu = data
+                },
+                submit: (event) => {
+                    let text = event.target.value
+                    this.kelas.push(text)
+                    event.target.value = ""
                 }
             },
             computed:{
