@@ -18,6 +18,7 @@
         }        
     </style>
 </head>
+
 <body>
    <div id="app">
     <header>
@@ -25,14 +26,16 @@
         <h1 v-text='name'></h1>
 
         <h3>Form Submit</h3>
-        <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit'></p>
+        <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit' v-model="kelasbaru"></p>
         
-        <h3>Daftar Kelas ({{ kelas.length}})</h3>
+        <h3>Daftar Kelas ({{ kelas.length }})</h3>
+
         <template v-if="kelas.length > 1">
             <ul>
-                <li v-for="(item, index) in kelas">{{ index+1 }} - {{ item }}</li>
+                <li v-for="(item, index) of kelas">{{ index+1 }} - {{ item }}</li>
             </ul>
         </template>
+
         <li v-else>Kelas Belum Tersedia</li>
            
 
@@ -42,41 +45,37 @@
             <li v-for="x in 5">{{ x }}</li>
         </ul>
 
-        <h3>Mencari Bilangan Genap: {{ number }}</h3>
+        <h3>Mencari Bilangan Genap: {{ numbers }}</h3>
         <ul>
-            <li v-for="x in findnumber(number)">{{ x }}</li>
+            <li v-for="x in caribilangangenap(numbers)">{{ x }}</li>
         </ul>
 
     <p>{{ kelas }}</p>
+    
     <p>
-    <div>
+   <div>
         <label><input type="checkbox" value="React" v-model="kelas">React</label>
         <label><input type="checkbox" value="Vue"v-model="kelas">Vue</label>
         <label><input type="checkbox" value="Angular"v-model="kelas">Angular</label>
-    </div>
+    </div>>
     </p>
-        <!-- <h1 v-text='bilangan'></h1>
-        <p>Bilangan ini adalah bilangan {{ numbering }} </p>
-        <p>
-            <button @click="handleclickplus">Tambah </button>
-        </p>
-        <p>
-            <button @click="handleclickminus">Kurang </button>
-        </p> -->
-        <img :src="pict" width="500"> 
-        
-        <p>The Progressive JavaScript Framework</p>
 
-        <a v-bind:class="{active: menu === 'home'}" href="#" v-on:click.prevent="gantimenu('home')">Home</a>
-        <a v-bind:class="{active: menu === 'about'}" href="#" v-on:@click.prevent="gantimenu('about')">About</a>
-        <a v-bind:class="{active: menu === 'blog'}" href="#" v-on:@click.prevent="gantimenu('blog')">Blog</a>
+    <p>
+        <button @click="handleclick">Ditekan</button>"
+    </p>
+    <img :src="pict" width="500"> 
+    <p>The Progressive JavaScript Framework</p>
+
+<a v-bind:class="{active: menu === 'home'}" href="#" v-on:click="gantimenu('home', $event)">Home</a>
+<a v-bind:class="{active: menu === 'about'}" href="#" v-on:click="gantimenu('home', $event)">About</a>
+<a v-bind:class="{active: menu === 'blog'}" href="#" v-on:click="gantimenu('home', $event)">Blog</a>
     </header>
     <footer id="footer">
         <p>&copy;2021</p>
     </footer>
    </div>
 
-   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         const vm = new Vue({
             el: '#app',
@@ -85,32 +84,29 @@
                 name: 'Mamanx Garox',
                 msg: 'Hello World!',
                 qty: 5,
-                fname: 'Minyak',
-                lname: ' Zaitun',
+                namaDepan: 'Minyak',
+                namaBelakang: ' Zaitun',
                 bilangan: 1,
-                pict: 'image/vuejs.jpg',
+                gambar: 'image/vuejs.jpg',
                 menu: 'home',
                 kelas: ['Golang', 'PHP'],
+                kelasbaru: '',
                 number: [1,2,3,4,5]
             },
             methods: {
                 getname: ()=>{
                     return 'Hello, '+ this.name
                 },
-                chname: (newName)=> {
-                    this.name = newName
+                ubahNama: (namaBaru)=> {
+                    this.name = namaBaru
                     return this.getname()
                 },
-                handleclickplus: () => {
+                handleclick: () => {
                     this.bilangan++
-                    this.pict = 'image/vue.jpg'
+                    this.gambar = 'image/vue.jpg'
                 },
-                handleclickminus: () => {
-                    this.bilangan--
-                    this.pict ='image/vuejs.jpg'
-                },
-                findnumber: (datanumb) => {
-                    return datanumb.filter( angka =>{
+                caribilangangenap: (data) => {
+                    return data.filter( angka =>{
                         return angka %2 == 0
                     })
                 },
@@ -119,18 +115,18 @@
                 },
                 submit: (event) => {
                     let text = event.target.value
-                    this.kelas.push(text)
-                    event.target.value = ""
+                    this.kelas.unshift(this.kelasbaru)
+                    this.kelasbaru = ""
                 }
             },
             computed:{
                 total: () => {
                     return this.qty * 10000
                 },
-                fullname: () => {
-                    return this.fname + this.lname
+                namaLengkap: () => {
+                    return this.namaDepan + this.namaBelakang
                 },
-                numbering: () => {
+                numbers: () => {
                     return  this.bilangan%2 === 0 ? 'Genap':'Ganjil'
                 }
             }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata" rel="stylesheet">
+    <style>
+        body{
+            margin: 5%;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+        .active{
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }        
+    </style>
+</head>
+
+<body>
+   <div id="app">
+<header-component></header-component>
+    <main>
+        <h3>Tambah Kelas</h3>
+        <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit' v-model="kelasbaru"></p>
+        
+        <hr>
+        <h3>Daftar Kelas ({{ kelas.length }})</h3>
+
+        <template v-if="kelas.length > 1">
+            <ul>
+                <li v-for="(item, index) of kelas">{{ index+1 }} - {{ item }}</li>
+            </ul>
+        </template>
+    <li v-else>Kelas Belum Tersedia</li>
+    </main>
+    
+    <footer-component></footer-component>
+</div>
+
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('header-component',{
+            template: `
+            <header>
+                <img src="image/vuejs.jpg" width="300">
+                <p>The Progressive JavaScript Framework</p>
+            </header>
+            `
+        })
+
+        Vue.component('footer-component',{
+            template: `
+            <footer id="footer">
+                <p>&copy;2021 - kelas.malam</p>
+            </footer>
+            `
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                 // string, number, boolean, array, obj
+                kelas: ['Golang', 'PHP'],
+                kelasbaru: ''
+            },
+            methods: {
+                submit: function(){
+                    this.kelas.unshift(this.kelasbaru)
+                    this.kelasbaru = ""
+                }
+            },
+            computed:{
+            
+            }
+        })
+    </script>
+</body>
+</html>
