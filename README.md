@@ -2,7 +2,7 @@
 
 ![Build Project](https://github.com/vuejs-id/blog/workflows/Build%20Project/badge.svg) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
->My journing learning Vuejs
+>My journey learning Vuejs
 
 ## ❤️ Development
 
