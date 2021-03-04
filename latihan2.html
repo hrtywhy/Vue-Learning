@@ -24,7 +24,7 @@
 <header-component nama="Vuejs" gambar="image/vuejs.jpg"></header-component>
 
 <main>
-    <kelas v-bind:items="kelas" :input="kelasbaru"></kelas>
+    <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></kelas>
     <home></home>
 </main>
 
@@ -65,12 +65,15 @@
             template: `
             <div>
                 <h3>Tambah Kelas</h3>
-                <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter="submit" v-model="input"></p>
+                <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter="$emit('submitkelas', $event)"></p>
                 <hr>
                 <h3>Daftar Kelas ({{ items.length }})</h3>
-                <template v-if="items.length > 1">
+                <template v-if="items.length">
                     <ul>
-                        <li v-for="(item, index) of items">{{ index+1 }} - {{ item }}</li>
+                        <li v-for="(item, index) of items">{{ index+1 }} - {{ item }}
+                        
+                            <a href="" v-on:click.prevent="$emit('hapuskelas', index)">hapus</a>
+                        </li>
                     </ul>
                 </template>
 
@@ -83,10 +86,7 @@
                 }
             },
             methods: {
-                submit: function(){
-                    this.kelas.unshift(this.kelasbaru)
-                    this.kelasbaru = ""
-                }
+                
             }
         })
 
@@ -100,7 +100,13 @@
                 kelasbaru: ''
             },
             methods: {
-                
+                hapuskelas: function(index){
+                    this.kelas.splice(index, 1)
+                },
+                submitkelas: function(event){
+                    const text = event.target.value
+                    this.kelas.unshift(text)
+                }
             },
             computed:{
             
