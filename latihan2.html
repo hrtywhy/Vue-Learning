@@ -22,17 +22,21 @@
 <body>
    <div id="app">
 <header-component nama="Vuejs" gambar="image/vuejs.jpg"></header-component>
-<header-component nama="Vue JS" gambar="image/logo.png"></header-component>
 
 <main>
-    <kelas/>
-
+    <kelas v-bind:items="kelas" :input="kelasbaru"></kelas>
+    <home></home>
 </main>
+
 <footer-component></footer-component>
 </div>
 
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
+        const Home = {
+            template: `<div>Home</div>`
+        }
+
         Vue.component('header-component',{
             props:['nama','gambar'],
             template: `
@@ -57,26 +61,25 @@
         })
 
         Vue.component('kelas',{
+            props:['items','input'],
             template: `
             <div>
-            <h3>Tambah Kelas</h3>
-            <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter="submit" v-model="kelasbaru"></p>
-            
-            <hr>
-            <h3>Daftar Kelas ({{ kelas.length }})</h3>
-            <template v-if="kelas.length > 1">
-                <ul>
-                    <li v-for="(item, index) of kelas">{{ index+1 }} - {{ item }}</li>
-                </ul>
-            </template>
+                <h3>Tambah Kelas</h3>
+                <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter="submit" v-model="input"></p>
+                <hr>
+                <h3>Daftar Kelas ({{ items.length }})</h3>
+                <template v-if="items.length > 1">
+                    <ul>
+                        <li v-for="(item, index) of items">{{ index+1 }} - {{ item }}</li>
+                    </ul>
+                </template>
 
-            <li v-else>Kelas Belum Tersedia</li>
+                <li v-else>Kelas Belum Tersedia</li>
             </div>
             `,
             data: () => {
                 return{
-                    kelas: ['Golang', 'PHP'],
-                    kelasbaru: ''
+                    
                 }
             },
             methods: {
@@ -89,8 +92,12 @@
 
         const vm = new Vue({
             el: '#app',
+            components:{
+                'home' : Home
+            },
             data: {
-                
+                kelas: ['Golang', 'PHP'],
+                kelasbaru: ''
             },
             methods: {
                 
