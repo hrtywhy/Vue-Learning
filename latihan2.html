@@ -28,7 +28,9 @@
     <home></home>
 </main>
 
-<footer-component></footer-component>
+<footer-component>
+    <p>&copy;2021 - kelas.malam</p>
+</footer-component>
 </div>
 
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -55,7 +57,7 @@
         Vue.component('footer-component',{
             template: `
             <footer id="footer">
-                <p>&copy;2021 - kelas.malam</p>
+                <slot></slot>
             </footer>
             `
         })
