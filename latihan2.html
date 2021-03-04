@@ -22,22 +22,10 @@
 <body>
    <div id="app">
 <header-component></header-component>
-    <main>
-        <h3>Tambah Kelas</h3>
-        <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit' v-model="kelasbaru"></p>
-        
-        <hr>
-        <h3>Daftar Kelas ({{ kelas.length }})</h3>
-
-        <template v-if="kelas.length > 1">
-            <ul>
-                <li v-for="(item, index) of kelas">{{ index+1 }} - {{ item }}</li>
-            </ul>
-        </template>
-    <li v-else>Kelas Belum Tersedia</li>
-    </main>
-    
-    <footer-component></footer-component>
+<main>
+    <kelas></kelas>
+</main>
+<footer-component></footer-component>
 </div>
 
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -46,9 +34,14 @@
             template: `
             <header>
                 <img src="image/vuejs.jpg" width="300">
-                <p>The Progressive JavaScript Framework</p>
+                <p v-text="pesan"></p>
             </header>
-            `
+            `,
+            data: function(){
+                return{
+                    pesan: 'Hello, Babi!'
+                }
+            }
         })
 
         Vue.component('footer-component',{
@@ -59,12 +52,36 @@
             `
         })
 
+        Vue.component('kelas',{
+            template: `
+            <div>
+            <h3>Tambah Kelas</h3>
+            <p><input type="text" placeholder='Nama kelas' v-on:keyup.enter='submit' v-model="kelasbaru"></p>
+            
+            <hr>
+            <h3>Daftar Kelas ({{ kelas.length }})</h3>
+            <template v-if="kelas.length > 1">
+                <ul>
+                    <li v-for="(item, index) of kelas">{{ index+1 }} - {{ item }}</li>
+                </ul>
+            </template>
+
+            <li v-else>Kelas Belum Tersedia</li>
+            </div>
+            `,
+            data: () => {
+                return{
+                    kelas: ['Golang', 'PHP'],
+                    kelasbaru: ''
+                }
+            }
+        })
+
         const vm = new Vue({
             el: '#app',
             data: {
                  // string, number, boolean, array, obj
-                kelas: ['Golang', 'PHP'],
-                kelasbaru: ''
+                
             },
             methods: {
                 submit: function(){
