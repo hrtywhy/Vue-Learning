@@ -21,9 +21,9 @@
 
 <body>
    <div id="app">
-<header-component></header-component>
+<header-component nama="Vuejs" gambar="image/vuejs.jpg"></header-component>
 <main>
-    <kelas></kelas>
+    <kelas/>
 </main>
 <footer-component></footer-component>
 </div>
@@ -31,10 +31,11 @@
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         Vue.component('header-component',{
+            props:['nama','gambar'],
             template: `
             <header>
-                <img src="image/vuejs.jpg" width="300">
-                <p v-text="pesan"></p>
+                <img :src="gambar" width="300">
+                <p>{{ 'Hello, ' +nama }}</p>
             </header>
             `,
             data: function(){
