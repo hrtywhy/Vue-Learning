@@ -23,9 +23,15 @@
    <div id="app">
 <header-component nama="Vuejs" gambar="image/vuejs.jpg"></header-component>
 
+<nav>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <router-link to="/kelas">Kelas</router-link>
+</nav>
 <main>
-    <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></kelas>
-    <home></home>
+    <!-- <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></kelas> -->
+    <!-- <home></home> -->
+    <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></router-view>
 </main>
 
 <footer-component>
@@ -34,35 +40,17 @@
 </div>
 
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
         const Home = {
             template: `<div>Home</div>`
         }
 
-        Vue.component('header-component',{
-            props:['nama','gambar'],
-            template: `
-            <header>
-                <img :src="gambar" width="300">
-                <p>{{ 'Hello, ' +nama }}</p>
-            </header>
-            `,
-            data: function(){
-                return{
-                    pesan: 'Hello, Babi!'
-                }
-            }
-        })
+        const About = {
+            template: `<div>About</div>`
+        }
 
-        Vue.component('footer-component',{
-            template: `
-            <footer id="footer">
-                <slot></slot>
-            </footer>
-            `
-        })
-
-        Vue.component('kelas',{
+        const Kelas = {
             props:['items','input'],
             template: `
             <div>
@@ -90,10 +78,49 @@
             methods: {
                 
             }
+        }
+
+
+        Vue.component('header-component',{
+            props:['nama','gambar'],
+            template: `
+            <header>
+                <img :src="gambar" width="300">
+                <p>{{ 'Hello, ' +nama }}</p>
+            </header>
+            `,
+            data: function(){
+                return{
+                    pesan: 'Hello, Babi!'
+                }
+            }
         })
+
+        Vue.component('footer-component',{
+            template: `
+            <footer id="footer">
+                <slot></slot>
+            </footer>
+            `
+        })
+
+        Vue.component('kelas',{
+         
+        })
+
+        const routes = [
+            { path: '/', component: Home },
+            { path: '/about', component: About },
+            { path: '/kelas', component: Kelas }
+            ]
+
+        const router = new VueRouter({
+            routes
+            })
 
         const vm = new Vue({
             el: '#app',
+            router,
             components:{
                 'home' : Home
             },
