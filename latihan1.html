@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata" rel="stylesheet">
+    <style>
+        body{
+            margin: 5%;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+        .active{
+            background: salmon;
+            border: 0;
+            padding: 5px;
+        }        
+    </style>
+</head>
+
+<body>
+   <div id="app">
+<header-component nama="Vuejs" gambar="image/logo.png"></header-component>
+
+<nav>
+    <router-link to="/">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <router-link to="/kelas">Kelas</router-link>
+</nav>
+<main>
+    <!-- <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></kelas> -->
+    <!-- <home></home> -->
+    <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></router-view>
+</main>
+
+<footer-component>
+    <p>&copy;2021 - kelas.malam</p>
+</footer-component>
+</div>
+
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        const Home = {
+            template: `<div>Home</div>`
+        }
+
+        const About = {
+            template: `<div>Ini adalah tentang about</div>`
+        }
+
+        const Kelas = {
+            props:['items','input'],
+            template: `
+            <div>
+                <h3>Tambah Kelas</h3>
+                
+                <form v-on:submit.prevent="submitkelas">
+                    <p><input type="text" v-model="kelas.judul" placeholder="Nama Kelas"></p>
+                    <div class="input-group">
+                        <label>Deskripsi: </label>
+                        <br>
+                        <textarea v-model="kelas.deskripsi"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Masukkan Gambar: </label>
+                        <br>
+                        <input type="file"/>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+
+                <hr>
+                <h3>Daftar Kelas ({{ items.length }})</h3>
+                <template v-if="items.length">
+                    <ul>
+                        <li v-for="(item, index) of items">{{ index+1 }} - {{ item.judul }}
+                        
+                            <a href="" v-on:click.prevent="$emit('hapuskelas', item.id)">hapus</a>
+                        </li>
+                    </ul>
+                </template>
+
+                <li v-else>Kelas Belum Tersedia</li>
+            </div>
+            `,
+            data: () => {
+                return{
+                    kelas:{
+                        judul:'',
+                        deskripsi:'',
+                        gambar:''
+                    }
+                }
+            },
+            methods: {
+                submitkelas: function(){
+                    const data: ={
+                        id: ,
+                        judul: this.kelas.judul,
+                        deskripsi: this.kelas.deskripsi,
+                        gambar: null
+                    }
+                    this.$emit('submitkelas', this.kelas)
+                }
+            }
+        }
+
+        Vue.component('header-component',{
+            props:['nama','gambar'],
+            template: `
+            <header>
+                <img :src="gambar" width="300">
+                <p>{{ 'Hello, ' +nama }}</p>
+            </header>
+            `,
+            data: function(){
+                return{
+                    pesan: 'Hello, Babi!'
+                }
+            }
+        })
+
+        Vue.component('footer-component',{
+            template: `
+            <footer id="footer">
+                <slot></slot>
+            </footer>
+            `
+        })
+
+        Vue.component('kelas',{
+         
+        })
+
+        const routes = [
+            { path: '/', component: Home },
+            { path: '/about', component: About },
+            { path: '/kelas', component: Kelas }
+            ]
+
+        const router = new VueRouter({
+            mode: 'history', 
+            routes
+            })
+
+// komponen utama
+        const vm = new Vue({
+            el: '#app',
+            router,
+            components:{
+                'home' : Home
+            },
+            data: {
+                kelas: [
+                    {id: 1, judul:'Vuejs', desc:'Progressive Javascript Framework', gambar:'vue.jpg' },
+                    {id: 2, judul:'Reactjs', desc:'Javascript Library for building UI', gambar:'vuejs.jpg' }
+                ]
+            },
+            methods: {
+                hapuskelas: function(id){
+                    this.kelas = this.kelas.filter(item => item.id != id)
+                },
+                submitkelas: function(data){
+                   console.log(data)
+                }
+            },
+            computed:{
+            
+            }
+        })
+    </script>
+</body>
+</html>
