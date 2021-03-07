@@ -29,8 +29,6 @@
     <router-link to="/kelas">Kelas</router-link>
 </nav>
 <main>
-    <!-- <kelas v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></kelas> -->
-    <!-- <home></home> -->
     <router-view v-bind:items="kelas" v-on:submitkelas="submitkelas" v-on:hapuskelas="hapuskelas"></router-view>
 </main>
 
@@ -65,9 +63,10 @@
                         <textarea v-model="kelas.deskripsi"></textarea>
                     </div>
                     <div class="input-group">
+                        <img :src="previewimg" />
                         <label>Masukkan Gambar: </label>
                         <br>
-                        <input type="file"/>
+                        <input type="file" v-on:change="upload"/>
                     </div>
                     <button type="submit">Submit</button>
                 </form>
@@ -92,23 +91,29 @@
                         judul:'',
                         deskripsi:'',
                         gambar:''
-                    }
+                    },
+                    previewimg: ""
                 }
             },
             methods: {
                 submitkelas: function(){
-                    const data: ={
+                    const data ={
                         id: uuidv4(),
                         judul: this.kelas.judul,
                         deskripsi: this.kelas.deskripsi,
                         gambar: null
                     }
                     this.$emit('submitkelas', data)
+                    this.kelas.judul = ""
+                    this.kelas.deskripsi = ""
+                },
+                upload: function(){
+
                 }
             }
         }
 
-        Vue.component('header-component',{
+        Vue.component('header-component', {
             props:['nama','gambar'],
             template: `
             <header>
