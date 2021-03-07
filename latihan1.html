@@ -63,7 +63,7 @@
                         <textarea v-model="kelas.deskripsi"></textarea>
                     </div>
                     <div class="input-group">
-                        <img :src="previewimg" />
+                        <img :src="previewimg" v-if="previewimg" width="200" />
                         <label>Masukkan Gambar: </label>
                         <br>
                         <input type="file" v-on:change="upload"/>
@@ -101,14 +101,16 @@
                         id: uuidv4(),
                         judul: this.kelas.judul,
                         deskripsi: this.kelas.deskripsi,
-                        gambar: null
+                        gambar: this.kelas.gambar
                     }
                     this.$emit('submitkelas', data)
                     this.kelas.judul = ""
                     this.kelas.deskripsi = ""
                 },
-                upload: function(){
-
+                upload: function(event){
+                    const namagambar = event.target.files[0].name
+                    this.kelas.gambar = namagambar
+                    this.previewimg = URL.createObjectURL(event.target.files[0])
                 }
             }
         }
